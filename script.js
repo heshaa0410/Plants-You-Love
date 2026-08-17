@@ -34,6 +34,8 @@ async function callClassroomAPI(userMessage) {
 }
 
 // Plant Database with plant icons for reliable display
+// This is the primary source of plants (100+) so the list is consistent
+// whether or not the /api/chat backend proxy is reachable (e.g. static hosting).
 const plantsDatabase = [
     { name: 'Monstera', emoji: '🪴', category: 'Indoor' },
     { name: 'Pothos', emoji: '🌿', category: 'Indoor' },
@@ -64,7 +66,106 @@ const plantsDatabase = [
     { name: 'Basil', emoji: '🌿', category: 'Outdoor' },
     { name: 'Tomato Plant', emoji: '🍅', category: 'Outdoor' },
     { name: 'Lettuce', emoji: '🥬', category: 'Outdoor' },
-    { name: 'Cactus', emoji: '🌵', category: 'Indoor' }
+    { name: 'Cactus', emoji: '🌵', category: 'Indoor' },
+    { name: 'Bird of Paradise', emoji: '🪴', category: 'Indoor' },
+    { name: 'Areca Palm', emoji: '🌴', category: 'Indoor' },
+    { name: 'Boston Fern', emoji: '🪴', category: 'Indoor' },
+    { name: 'Chinese Evergreen', emoji: '🌿', category: 'Indoor' },
+    { name: 'English Ivy', emoji: '🌿', category: 'Indoor' },
+    { name: 'Jade Plant', emoji: '🌵', category: 'Indoor' },
+    { name: 'African Violet', emoji: '🌸', category: 'Indoor' },
+    { name: 'Anthurium', emoji: '🌺', category: 'Indoor' },
+    { name: 'Begonia', emoji: '🌸', category: 'Indoor' },
+    { name: 'Croton', emoji: '🌿', category: 'Indoor' },
+    { name: 'Prayer Plant', emoji: '🪴', category: 'Indoor' },
+    { name: 'String of Pearls', emoji: '🌱', category: 'Indoor' },
+    { name: 'Air Plant', emoji: '🌱', category: 'Indoor' },
+    { name: 'Money Tree', emoji: '🌳', category: 'Indoor' },
+    { name: 'Bonsai Tree', emoji: '🌳', category: 'Indoor' },
+    { name: 'Christmas Cactus', emoji: '🌵', category: 'Indoor' },
+    { name: 'Bromeliad', emoji: '🌺', category: 'Indoor' },
+    { name: 'Kentia Palm', emoji: '🌴', category: 'Indoor' },
+    { name: 'Ponytail Palm', emoji: '🌴', category: 'Indoor' },
+    { name: 'Parlor Palm', emoji: '🌴', category: 'Indoor' },
+    { name: 'Nerve Plant', emoji: '🌿', category: 'Indoor' },
+    { name: 'Peperomia', emoji: '🌿', category: 'Indoor' },
+    { name: 'Tulsi', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Marigold', emoji: '🌼', category: 'Outdoor' },
+    { name: 'Chrysanthemum', emoji: '🌼', category: 'Outdoor' },
+    { name: 'Petunia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Zinnia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Geranium', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Camellia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Azalea', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Bougainvillea', emoji: '🌺', category: 'Outdoor' },
+    { name: 'Wisteria', emoji: '💜', category: 'Outdoor' },
+    { name: 'Magnolia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Cherry Blossom', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Plumeria', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Bluebell', emoji: '💙', category: 'Outdoor' },
+    { name: 'Poppy', emoji: '🌺', category: 'Outdoor' },
+    { name: 'Carnation', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Iris', emoji: '💜', category: 'Outdoor' },
+    { name: 'Peony', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Dahlia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Gardenia', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Honeysuckle', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Morning Glory', emoji: '💙', category: 'Outdoor' },
+    { name: 'Clematis', emoji: '💜', category: 'Outdoor' },
+    { name: 'Snapdragon', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Cosmos', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Pansy', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Foxglove', emoji: '💜', category: 'Outdoor' },
+    { name: 'Delphinium', emoji: '💙', category: 'Outdoor' },
+    { name: 'Rosemary', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Thyme', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Oregano', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Cilantro', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Parsley', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Sage', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Chives', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Dill', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Bell Pepper', emoji: '🫑', category: 'Outdoor' },
+    { name: 'Cucumber', emoji: '🥒', category: 'Outdoor' },
+    { name: 'Carrot', emoji: '🥕', category: 'Outdoor' },
+    { name: 'Potato', emoji: '🥔', category: 'Outdoor' },
+    { name: 'Corn', emoji: '🌽', category: 'Outdoor' },
+    { name: 'Strawberry', emoji: '🍓', category: 'Outdoor' },
+    { name: 'Blueberry Bush', emoji: '🫐', category: 'Outdoor' },
+    { name: 'Grape Vine', emoji: '🍇', category: 'Outdoor' },
+    { name: 'Apple Tree', emoji: '🍎', category: 'Outdoor' },
+    { name: 'Lemon Tree', emoji: '🍋', category: 'Outdoor' },
+    { name: 'Orange Tree', emoji: '🍊', category: 'Outdoor' },
+    { name: 'Banana Plant', emoji: '🍌', category: 'Outdoor' },
+    { name: 'Mango Tree', emoji: '🥭', category: 'Outdoor' },
+    { name: 'Coconut Palm', emoji: '🥥', category: 'Outdoor' },
+    { name: 'Olive Tree', emoji: '🫒', category: 'Outdoor' },
+    { name: 'Fig Tree', emoji: '🌳', category: 'Outdoor' },
+    { name: 'Pine Tree', emoji: '🌲', category: 'Outdoor' },
+    { name: 'Maple Tree', emoji: '🍁', category: 'Outdoor' },
+    { name: 'Oak Tree', emoji: '🌳', category: 'Outdoor' },
+    { name: 'Willow Tree', emoji: '🌳', category: 'Outdoor' },
+    { name: 'Birch Tree', emoji: '🌳', category: 'Outdoor' },
+    { name: 'Eucalyptus', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Bamboo', emoji: '🎋', category: 'Outdoor' },
+    { name: 'Sage Brush', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Barrel Cactus', emoji: '🌵', category: 'Outdoor' },
+    { name: 'Prickly Pear', emoji: '🌵', category: 'Outdoor' },
+    { name: 'Agave', emoji: '🌵', category: 'Outdoor' },
+    { name: 'Yucca', emoji: '🌵', category: 'Outdoor' },
+    { name: 'Lotus', emoji: '🪷', category: 'Outdoor' },
+    { name: 'Water Lily', emoji: '🪷', category: 'Outdoor' },
+    { name: 'Venus Flytrap', emoji: '🌱', category: 'Indoor' },
+    { name: 'Baobab Tree', emoji: '🌳', category: 'Outdoor' },
+    { name: 'Redwood Tree', emoji: '🌲', category: 'Outdoor' },
+    { name: 'Cypress Tree', emoji: '🌲', category: 'Outdoor' },
+    { name: 'Papyrus', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Sedum', emoji: '🌵', category: 'Outdoor' },
+    { name: 'Coleus', emoji: '🌿', category: 'Outdoor' },
+    { name: 'Impatiens', emoji: '🌸', category: 'Outdoor' },
+    { name: 'Amaryllis', emoji: '🌸', category: 'Indoor' },
+    { name: 'Poinsettia', emoji: '🌺', category: 'Indoor' },
+    { name: 'Cyclamen', emoji: '🌸', category: 'Indoor' }
 ];
 
 // State management
@@ -100,7 +201,7 @@ async function initAgent1() {
     const apiResponse = await callClassroomAPI(prompt);
 
     // Process API response to extract plants
-    let plants = [];
+    const apiPlants = [];
     if (apiResponse) {
         const lines = apiResponse.split('\n');
         lines.forEach(line => {
@@ -109,16 +210,23 @@ async function initAgent1() {
                 const name = match[1].trim();
                 const emoji = match[2];
                 if (name.length > 0) {
-                    plants.push({ name, emoji, category: 'World' });
+                    apiPlants.push({ name, emoji, category: 'World' });
                 }
             }
         });
     }
 
-    // If API fails or returns empty, use default database
-    if (plants.length === 0) {
-        plants = plantsDatabase;
-    }
+    // Always start from the local database (works even if the /api/chat
+    // proxy is unreachable, e.g. on static hosting), and add any extra
+    // plants returned by the API that aren't already in it.
+    const plants = [...plantsDatabase];
+    const existingNames = new Set(plants.map(p => p.name.toLowerCase()));
+    apiPlants.forEach(plant => {
+        if (!existingNames.has(plant.name.toLowerCase())) {
+            plants.push(plant);
+            existingNames.add(plant.name.toLowerCase());
+        }
+    });
 
     // Store plants in state for later use
     state.allPlants = plants;
