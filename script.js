@@ -1,12 +1,6 @@
 // API Configuration
-function shouldUseLocalOnlyMode() {
-    if (typeof window === 'undefined') return false;
-    const host = window.location.hostname;
-    return host !== 'localhost' && host !== '127.0.0.1' && host !== '0.0.0.0';
-}
-
 const API_CONFIG = {
-    endpoint: shouldUseLocalOnlyMode() ? null : '/api/chat',
+    endpoint: '/api/chat',
     headers: {
         'Content-Type': 'application/json'
     },
@@ -15,11 +9,6 @@ const API_CONFIG = {
 
 // Function to call the classroom proxy API
 async function callClassroomAPI(userMessage) {
-    if (!API_CONFIG.endpoint) {
-        console.info('Static hosting detected: using local plant data instead of the backend API.');
-        return null;
-    }
-
     try {
         const response = await fetch(API_CONFIG.endpoint, {
             method: 'POST',
