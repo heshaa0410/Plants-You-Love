@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Plants You Love</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🌱 The Plants You Love</h1>
+            <p>Get help growing your plants strong with AI Agents</p>
+        </header>
+
+        <!-- Agent 1: Plant Lister -->
+        <div class="agent-section" id="agent1">
+            <div class="agent-header">
+                <span class="agent-badge">AI Agent 1 - Plant Lister</span>
+                <h2>🌍 Discover Plants</h2>
+            </div>
+            <p class="agent-description">Explore thousands of plants from around the world and select the ones you have at home</p>
+            
+            <div class="search-box">
+                <input type="text" id="plantSearch" placeholder="Search plants...">
+                <button id="searchBtn">Search</button>
+            </div>
+
+            <div class="plants-grid" id="plantsGrid">
+                <!-- Plants will be loaded here -->
+            </div>
+
+            <div class="selected-plants">
+                <h3>Your Plants at Home</h3>
+                <div class="selected-list" id="selectedPlants">
+                    <p class="empty-state">No plants selected yet</p>
+                </div>
+                <button id="continueBtn" class="continue-btn" style="display: none;">Continue to AI Agent 2 - Plant Descriptor →</button>
+            </div>
+        </div>
+
+        <!-- Agent 2: Plant Descriptor -->
+        <div class="agent-section hidden" id="agent2">
+            <div class="agent-header">
+                <span class="agent-badge">AI Agent 2 - Plant Descriptor</span>
+                <h2>🔍 Identify Problems</h2>
+            </div>
+            <p class="agent-description">Select which plants need help and learn about their characteristics</p>
+
+            <div class="plants-selection" id="plantsForHelp">
+                <!-- Selected plants will appear here for selection -->
+            </div>
+
+            <div class="plant-info-section hidden" id="plantInfoSection">
+                <h3>Plant Information</h3>
+                <div class="plant-details" id="plantDetails"></div>
+            </div>
+
+            <div class="problem-section hidden" id="problemSection">
+                <h3>What's wrong with your plant?</h3>
+                <textarea id="problemDescription" placeholder="Describe what's wrong with your plant (e.g., yellowing leaves, wilting, brown spots)..."></textarea>
+                <button id="submitProblemBtn" class="submit-btn">Get Help from AI Agent 3 - Plant Doctor →</button>
+            </div>
+
+            <button id="backToAgent1" class="back-btn">← Back to AI Agent 1 - Plant Lister</button>
+        </div>
+
+        <!-- Agent 3: Plant Issue Solution Provider -->
+        <div class="agent-section hidden" id="agent3">
+            <div class="agent-header">
+                <span class="agent-badge">AI Agent 3 - Plant Doctor</span>
+                <h2>💡 Expert Solutions & Tips</h2>
+            </div>
+            <p class="agent-description">Receive AI-powered solutions and expert tips for your plant problems</p>
+
+            <div class="current-issue">
+                <h3>Your Issue:</h3>
+                <p id="issueDisplay"></p>
+            </div>
+
+            <div class="solutions-container" id="solutionsContainer">
+                <div class="loading">
+                    <span class="spinner"></span>
+                    <p>AI Agent 3 - Plant Doctor is analyzing your plant problem...</p>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="backToAgent2" class="back-btn">← Back to AI Agent 2 - Plant Descriptor</button>
+                <button id="startOverBtn" class="start-btn">Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
